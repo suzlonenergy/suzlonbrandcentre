@@ -1363,10 +1363,10 @@ h1, h2, h3, h4, h5, h6 {
     
     /* Parallax Background Implementation */
     background-image: url('Homepage Images/WindSolarStorage.jpg');
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: fit;
 }
 
 /* Gradient to ensure the off-white text pops against lighter sky backgrounds */
