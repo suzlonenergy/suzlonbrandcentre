@@ -1474,7 +1474,7 @@ background-attachment: fixed; /* Creates the smooth parallax scrolling effect */
 
     color: var(--white);
 
-    padding: 6rem var(--grid-margin); 
+    padding: 1rem var(--grid-margin); 
 
     text-align: center;
 
@@ -1798,7 +1798,97 @@ background-attachment: fixed; /* Creates the smooth parallax scrolling effect */
         left: 8%;
         bottom: 20px;
     }
-}/* =========================================
+}
+
+/* =========================================
+   SECTION 8.5: Architecture Bar 
+========================================= */
+.architecture-bar {
+    width: 100%;
+    background-color: var(--humble-beige);
+    padding: 3.5rem 8%; /* Matches the 8% left-align system */
+    color: var(--ever-teal);
+    border-bottom: 1px solid rgba(0, 112, 120, 0.15); /* Subtle separation line */
+}
+
+.architecture-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1500px;
+}
+
+.arch-subtitle {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.arch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+}
+
+.arch-items {
+    display: flex;
+    gap: 3.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.arch-item {
+    display: flex;
+    align-items: center;
+/*    gap: 0.1rem;*/
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+/* Specific styling for the uploaded spark/crosshair icon */
+.spark-icon {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 25px; /* Visual optical alignment with the text baseline */
+    display: block;
+    object-fit: contain;
+}
+
+.arch-url {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .arch-items {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .arch-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2.5rem;
+    }
+    
+    .arch-items {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+}
+
+/* =========================================
    SECTION 10: Brand on a Page
 ========================================= */
 .boap-section {
