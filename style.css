@@ -700,7 +700,7 @@ h1, h2, h3, h4, h5, h6 {
 
     background: linear-gradient(rgba(10, 25, 35, 0.75), rgba(5, 15, 25, 0.85)), url('Homepage Images/SUZLON IS EVOLVING.jpg') no-repeat center center/cover;
 
-background-attachment: fixed; /* Creates the smooth parallax scrolling effect */
+/* background-attachment: fixed; /* Creates the smooth parallax scrolling effect */ */
 
     color: var(--white);
 
