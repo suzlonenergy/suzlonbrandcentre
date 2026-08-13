@@ -1366,7 +1366,7 @@ h1, h2, h3, h4, h5, h6 {
     /* background-attachment: fixed; */
     background-position: center;
     background-repeat: no-repeat;
-    background-size: fit;
+    background-size: cover;
 }
 
 /* Gradient to ensure the off-white text pops against lighter sky backgrounds */
