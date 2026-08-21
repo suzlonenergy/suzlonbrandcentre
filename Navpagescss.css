@@ -57,7 +57,7 @@ body {
 .page-hero-content {
     position: relative;
     z-index: 2;
-    max-width: 1000px;
+    max-width: 1500px;
     margin: 0 auto;
     width: 100%;
 }
@@ -362,4 +362,44 @@ body {
 .dot.active, .dot:hover {
     background-color: var(--prime-yellow);
     border-color: var(--prime-yellow);
+}
+
+/* =========================================
+   INLINE DOWNLOAD BUTTONS (Dynamic)
+========================================= */
+.inline-download {
+    display: none; /* Hidden by default */
+    padding-left: 35px; /* Aligns perfectly with the text, skipping the arrow */
+    padding-bottom: 15px;
+    margin-top: -5px;
+}
+
+/* Magically reveals the button only when the link above it is active */
+.interactive-links a.active-link + .inline-download {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sleeker, smaller button for inline use */
+.inline-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 0.8rem;
+    border: 1px solid var(--ever-teal);
+    color: var(--ever-teal);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.inline-btn:hover {
+    background-color: var(--ever-teal);
+    color: var(--prime-yellow);
 }
