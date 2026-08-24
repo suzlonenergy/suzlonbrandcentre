@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speak with Goodness | Suzlon Brand Centre</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monda:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Navpagescss.css">
+
+    <style>
+        /* 1. MAGNETIC SCROLL STOP */
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y proximity; 
+            scroll-padding-top: 100px; 
+        }
+
+        .page-hero, 
+        .voice-grid, 
+        .support-section {
+            scroll-snap-align: center; 
+        }
+
+        /* 2. SIDE-BY-SIDE GRID LAYOUT (COMPACT) */
+        .voice-section-container {
+            max-width: 1200px;
+            /* Reduced margin to keep it higher on the screen */
+            margin: 1rem auto 4rem auto; 
+            padding: 0 2rem;
+        }
+
+        .voice-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 4rem; 
+            align-items: center; /* Center aligns to keep it balanced vertically */
+            justify-items: center; /* Centers the cards in their columns */
+        }
+
+        /* TEXT SECTIONS */
+        .voice-text-card {
+            background: transparent;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+            transition: transform 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 420px; /* Restricts width so height fits on screen */
+        }
+
+        .voice-text-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* 3. EMBEDDED A4 BANNER STYLING */
+        .embedded-banner {
+            aspect-ratio: 1 / 1.414; /* Standard A4 Aspect Ratio */
+            width: 100%;
+            background-color: #007078; /* Ever Teal */
+            position: relative;
+            box-sizing: border-box;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 112, 120, 0.2);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10%;
+            margin-bottom: 1.5rem; /* Tighter gap above button */
+            transition: transform 0.3s ease;
+        }
+
+        /* Secondary variance for Section 2 */
+        .embedded-banner.alt-tone {
+            background-color: #005a61; 
+            box-shadow: 0 20px 40px rgba(0, 90, 97, 0.2);
+        }
+
+        .embedded-banner:hover {
+            transform: scale(1.02);
+        }
+
+        .embedded-banner h3 {
+            color: #FFC627; /* Prime Yellow */
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem); /* Slightly scaled down font */
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0 0 1rem 0;
+            letter-spacing: -1px;
+            z-index: 2;
+        }
+
+        .embedded-banner p {
+            color: #FFFFFF !important;
+            font-size: clamp(0.95rem, 1.8vw, 1.15rem); /* Slightly scaled down text */
+            line-height: 1.6;
+            font-weight: 400;
+            margin: 0;
+            z-index: 2;
+        }
+
+        .accent-shape-1 {
+            position: absolute;
+            bottom: -15%;
+            right: -15%;
+            width: 60%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            z-index: 1;
+        }
+
+        .accent-shape-2 {
+            position: absolute;
+            top: 10%;
+            left: -10%;
+            width: 25%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 198, 39, 0.2);
+            z-index: 1;
+        }
+        
+        .brand-logo-area {
+            position: absolute;
+            bottom: 6%;
+            left: 10%;
+            color: #FFC627;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .voice-actions {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        /* 4. SCROLL REVEAL ANIMATION */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 900px) {
+            .voice-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .voice-text-card {
+                max-width: 450px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="Homepage Images/Asset 1@2x-8.png" alt="Suzlon Logo" style="height: 45px; border: none;">
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="good-expression.html">The Good Expression</a>
+            <a href="visual-identity.html">The Visual Identity</a>
+            <a href="touchpoints.html">Good at Every Touchpoint</a>
+			<a href="good-voice.html" class="active-nav">Speak with Goodness</a>
+        </nav>
+    </header>
+
+    <main class="editorial-main">
+        
+        <section class="page-hero" style="padding: 4rem 2rem 2rem 2rem;">
+            <div class="page-hero-content reveal">
+                <h1>Speak with Goodness</h1>
+                <p>Establishing our verbal identity, tone of voice, and the core principles for writing the Suzlon way.</p>
+            </div>
+        </section>
+
+        <div class="voice-section-container">
+            <div class="voice-grid reveal">
+
+                <div class="voice-text-card">
+                    <div class="embedded-banner">
+                        <div class="accent-shape-1"></div>
+                        <div class="accent-shape-2"></div>
+                        <h3>Tone of Voice</h3>
+                        <p>Our voice is progressive, authoritative yet approachable, and deeply purposeful. We speak with the confidence of an industry leader driving a sustainable future.</p>
+                        <div class="brand-logo-area">Suzlon Brand Centre</div>
+                    </div>
+
+                    <div class="voice-actions">
+                        <a href="Homepage Images/Suzlon Tone of Voice.pdf" class="contact-btn" target="_blank">
+                            Tone of Voice Guide (.PDF) <span class="arrow">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="voice-text-card">
+                    <div class="embedded-banner alt-tone">
+                        <div class="accent-shape-1"></div>
+                        <div class="accent-shape-2"></div>
+                        <h3>Brand Voice</h3>
+                        <p>Clear, concise, and structured. Guidelines on active voice, plain English standards, and formatting terminology to ensure consistent communication across all channels.</p>
+                        <div class="brand-logo-area">Suzlon Brand Centre</div>
+                    </div>
+
+                    <div class="voice-actions">
+                        <a href="Homepage Images/Suzlon Brand Voice.pdf" class="contact-btn" target="_blank">
+                            Brand Voice Guide (.PDF) <span class="arrow">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    
+    <footer class="support-section reveal">
+        <div class="support-content">
+            <h2>Need help with messaging or copy review?</h2>
+            <p>Reach out to the corporate communications team for editorial guidance on major announcements or campaigns.</p>
+            <div>
+                <a href="mailto:corpcom@suzlon.com" class="contact-btn">
+                    Contact Corporate Communications <span class="arrow">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.1, 
+                rootMargin: "0px 0px -20px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealOnScroll.observe(el);
+            });
+            
+        });
+    </script>
+</body>
+</html>
