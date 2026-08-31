@@ -23,7 +23,7 @@ body {
 .page-hero {
     /* Multi-layered background: Left-to-right gradient overlay + Background Image */
     background: linear-gradient(90deg, rgba(0, 112, 120, 0.95) 0%, rgba(0, 112, 120, 0.75) 50%, rgba(0, 112, 120, 0.4) 100%), 
-                url('Homepage Images/header.png');
+                url('Homepage Images/Homepage Images/Main Banner.jpg');
     
     /* Parallax Background Implementation */
     background-attachment: fixed;
