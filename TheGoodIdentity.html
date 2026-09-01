@@ -61,7 +61,17 @@
                         <p>The primary identifier of our brand, capturing our heritage and future in a single mark.</p>
                         
                         <ul class="interactive-links">
-                            <li><a href="#" class="active-link" data-image="Homepage Images/Logo Overveiw@2x.png">Logo Overview</a></li>
+                            <li>
+                                <a href="#" class="active-link" data-image="Homepage Images/Logo Overveiw@2x.png">
+                                    Logo Overview
+                                </a>
+                                <!-- Dynamic Inline Download Button -->
+                                <div class="inline-download">
+    <a href="https://suzlonenergy365-my.sharepoint.com/:u:/g/personal/47001_suzlon_com/IQCrwujmywY8Sp8dtZA9EmkBARiGlCIcnj2LA-zPnRqWDiw?e=p2CJXR&download=1" class="inline-btn">
+        Download (.ZIP) &darr;
+    </a>
+</div>
+                            </li>
                             <li><a href="#" data-image="Homepage Images/Logo Lock-ups.png">Logo Lock-ups</a></li>
                             <li><a href="#" data-image="Homepage Images/Clear Space & Minimum Size 2@2x.png">Clear Space and Minimum Size</a></li>
                             <li><a href="#" data-image="Homepage Images/Colour Versions@2x.png">Colour Versions</a></li>
@@ -69,11 +79,13 @@
                             <li><a href="#" data-image="Homepage Images/LogoDonts@2x.png">Logo Don'ts</a></li>
                         </ul>
                     </div>
+<!--
                     <div class="hub-actions">
                         <a href="logo.html" class="contact-btn">
                             Download Guidelines <span class="arrow">&rarr;</span>
                         </a>
                     </div>
+-->
                 </div>
             </article>
 
@@ -90,7 +102,7 @@
                         <p>The articulation of our commitment, designed to accompany and strengthen our visual communications.</p>
                         
                         <ul class="interactive-links">
-                            <li><a href="#" class="active-link" data-image="Homepage Images/UnderstandingthePromise2x.png">Understanding the Promise</a></li>
+                            <li><a href="#" class="active-link" data-image="Homepage Images/GETW.png">Understanding the Promise</a></li>
                             <li><a href="#" data-image="Homepage Images/PromiseLockups2x.png">Promise Lock-ups</a></li>
                             <li><a href="#" data-image="Homepage Images/ColourApplications2x.png">Colour Applications</a></li>
                             <li><a href="#" data-image="Homepage Images/MinimumSize2x.png">Minimum Size</a></li>
@@ -98,11 +110,13 @@
                             <li><a href="#" data-image="Homepage Images/PromiseLineDonts2x.png">Promise Line Don'ts</a></li>
                         </ul>
                     </div>
+<!--
                     <div class="hub-actions">
                         <a href="#" class="contact-btn">
                             Explore Hub <span class="arrow">&rarr;</span>
                         </a>
                     </div>
+-->
                 </div>
             </article>
 
@@ -120,18 +134,20 @@
                         
                         <ul class="interactive-links">
                             <li><a href="#" class="active-link" data-image="Homepage Images/Introducing the Sum.jpg">Introducing the Sum</a></li>
-                            <li><a href="#" data-image="Homepage Images/Using the Lock up.jpg">Using the Lock-up</a></li>
+                            <li><a href="#" data-image="Homepage Images/logo lockup.jpg">Using the Lock-up</a></li>
                             <li><a href="#" data-image="Homepage Images/Minimum Size.jpg">Minimum Size</a></li>
                             <li><a href="#" data-image="Homepage Images/Applications.png">Applications</a></li>
                             <li><a href="#" data-image="Homepage Images/Patterns and Expression.jpg">Patterns and Expression</a></li>
                             <li><a href="#" data-image="Homepage Images/The Sum Donts.jpg">The Sum Don'ts</a></li>
                         </ul>
                     </div>
+<!--
                     <div class="hub-actions">
                         <a href="#" class="contact-btn">
                             Explore Hub <span class="arrow">&rarr;</span>
                         </a>
                     </div>
+-->
                 </div>
             </article>
 
@@ -158,11 +174,13 @@
 -->
                         </ul>
                     </div>
+<!--
                     <div class="hub-actions">
                         <a href="#" class="contact-btn">
                             Explore Hub <span class="arrow">&rarr;</span>
                         </a>
                     </div>
+-->
                 </div>
             </article>
 
@@ -189,11 +207,13 @@
 -->
                         </ul>
                     </div>
+<!--
                     <div class="hub-actions">
                         <a href="#" class="contact-btn">
                             Explore Hub <span class="arrow">&rarr;</span>
                         </a>
                     </div>
+-->
                 </div>
             </article>
 
@@ -232,7 +252,7 @@
             });
 
             // 2. CLICK HANDLER FOR SWAPPING IMAGES
-            const galleryLinks = document.querySelectorAll('.interactive-links a');
+           const galleryLinks = document.querySelectorAll('.interactive-links a:not(.inline-btn)');
             
             galleryLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
