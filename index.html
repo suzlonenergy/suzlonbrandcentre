@@ -45,14 +45,21 @@
     </div>
 </section>
 
-        <!-- Floating Global Search Component -->
-        <div class="search-container">
-            <div class="search-box cut-top-right">
-                <input type="text" placeholder="Search the Brand Center (e.g., logo, templates, tone of voice)...">
-                <button>Search</button>
-            </div>
-            <div class="search-hint">Popular: <a href="#">presentation template</a>, <a href="#">colour palette</a>, <a href="#">approval</a></div>
-        </div>
+       <!-- Floating Global Search Component -->
+<div class="search-container" style="position: relative;">
+    <div class="search-box cut-top-right">
+        <!-- Added ID and autocomplete="off" -->
+        <input type="text" id="brandSearchInput" placeholder="Search the Brand Center (e.g., logo, templates, tone of voice)..." autocomplete="off">
+        <!-- Added ID -->
+        <button id="brandSearchBtn">Search</button>
+    </div>
+    
+    <!-- NEW: Dropdown container for live results -->
+    <div id="brandSearchResults" class="search-results-dropdown"></div>
+
+    <!-- Updated hrefs to actually work! -->
+    <div class="search-hint">Popular: <a href="touchpoints.html">presentation template</a>, <a href="visualidentity.html">colour palette</a>, <a href="mailto:corpcom@suzlon.com">approval</a></div>
+</div>
 
         <!-- Priority User Journeys -->
         <section class="journeys-section">
@@ -67,37 +74,36 @@
                     </div>
                 </a>
 -->
-                <a href="#" class="journey-card cut-top-right">
+                <a href="TheGoodIdentity.html" class="journey-card cut-top-right">
                     <span class="need">I need a logo or template</span>
                     <div class="action-row">
                         <span class="action">Create with Confidence</span>
                         <span class="arrow">&rarr;</span>
                     </div>
                 </a>
-                <a href="#" class="journey-card cut-bottom-left">
+                <a href="thegoodvoice.html" class="journey-card cut-top-right">
                     <span class="need">I'm creating communication</span>
                     <div class="action-row">
                         <span class="action">Speak with Goodness</span>
                         <span class="arrow">&rarr;</span>
                     </div>
                 </a>
-                <a href="#" class="journey-card cut-top-right">
+                <a href="touchpoints.html" class="journey-card cut-top-right">
                     <span class="need">I need inspiration/examples</span>
                     <div class="action-row">
                         <span class="action">Brand in Action</span>
                         <span class="arrow">&rarr;</span>
                     </div>
                 </a>
-<!--
-                <a href="#" class="journey-card cut-both">
-                    <span class="need">I need review or approval</span>
+                <a href="good-energy-people.html" class="journey-card cut-top-right">
+                    <span class="need">I am new to suzlon culture</span>
                     <div class="action-row">
-                        <span class="action">Check Before You Share</span>
+                        <span class="action">Live our culture</span>
                         <span class="arrow">&rarr;</span>
                     </div>
                 </a>
             </div>
--->
+
         </section>
 
         
@@ -116,7 +122,7 @@
         <!-- Modern Image Integration using the Suzlon Chamfer device -->
         <div class="image-content cut-bottom-left">
             <!-- You can replace this image URL with an appropriate monumental/scale photograph from the brand library -->
-            <img src="https://www.suzlon.com/images/our-brand/Our%20Brand%20Banner%201920x1080.jpg" alt="The Changing World of Energy">
+            <img src="Homepage Images/Our Brand Banner 1920x1080.jpg" alt="The Changing World of Energy">
         </div>
     </div>
 </section>
@@ -156,7 +162,7 @@
                 <!-- Right Image Column (Using the chamfer cut to match brand elements) -->
                 <div class="image-content cut-bottom-left">
                     <!-- Replace the src with the actual path to your image -->
-                    <img src="Homepage Images/RE Assets.jpg" alt="Suzlon Renewable Energy Ecosystem with Wind, Solar, and Storage">
+                    <img src="Homepage Images/WindSolarStorage.jpg" alt="Suzlon Renewable Energy Ecosystem with Wind, Solar, and Storage">
                 </div>
                 
             </div>
@@ -273,5 +279,110 @@
             
         
     </footer>
+		<script>
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // The content index for your site
+    const searchIndex = [
+        {
+            title: "The Good Expression",
+            url: "TheGoodExpression.html",
+            description: "Icons, photography style, motion principles, and layout grids.",
+            keywords: "icon, dual tone, photography, images, warmth, motion, layout, grid, system"
+        },
+        {
+            title: "Speak with Goodness (Tone of Voice)",
+            url: "thegoodvoice.html",
+            description: "Verbal identity, grammar, and writing style guidelines.",
+            keywords: "voice, tone, writing, grammar, checklist, active voice, copy, messaging"
+        },
+        {
+            title: "The Good Energy People",
+            url: "good-energy-people.html",
+            description: "Culture, EVP, Values, Behaviours, and Recruitment assets.",
+            keywords: "people, culture, video, film, evp, employer brand, values, behaviours, recruitment, posters"
+        },
+        {
+            title: "Good at Every Touchpoint",
+            url: "touchpoints.html",
+            description: "Download PPT, Word, and digital UI templates.",
+            keywords: "templates, presentation template, ready to use, ppt, powerpoint, word, document, ui, physical, operations, signage"
+        },
+        {
+            title: "The Visual Identity",
+            url: "TheGoodIdentity.html",
+            description: "Logos, colour palettes, typography, and core brand identity.",
+            keywords: "logo, colours, colour palette, fonts, typography, identity, brand, yellow, teal"
+        }
+    ];
+
+    const searchInput = document.getElementById('brandSearchInput');
+    const searchBtn = document.getElementById('brandSearchBtn');
+    const searchDropdown = document.getElementById('brandSearchResults');
+
+    if (searchInput && searchDropdown) {
+        
+        const performSearch = () => {
+            const query = searchInput.value.toLowerCase().trim();
+            
+            if (query.length === 0) {
+                searchDropdown.innerHTML = '';
+                searchDropdown.classList.remove('active');
+                return;
+            }
+
+            const results = searchIndex.filter(item => {
+                return item.title.toLowerCase().includes(query) || 
+                       item.keywords.toLowerCase().includes(query) || 
+                       item.description.toLowerCase().includes(query);
+            });
+
+            searchDropdown.innerHTML = '';
+            
+            if (results.length > 0) {
+                results.forEach(item => {
+                    const link = document.createElement('a');
+                    link.href = item.url;
+                    link.className = 'search-result-item';
+                    link.innerHTML = `
+                        <span class="search-result-title">${item.title}</span>
+                        <span class="search-result-desc">${item.description}</span>
+                    `;
+                    searchDropdown.appendChild(link);
+                });
+            } else {
+                searchDropdown.innerHTML = `<div class="no-results">No results found for "${query}"</div>`;
+            }
+
+            searchDropdown.classList.add('active');
+        };
+
+        // Trigger on typing
+        searchInput.addEventListener('input', performSearch);
+        
+        // Trigger on button click
+        if(searchBtn) {
+            searchBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                performSearch();
+            });
+        }
+
+        // Close when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target) && (!searchBtn || !searchBtn.contains(e.target))) {
+                searchDropdown.classList.remove('active');
+            }
+        });
+        
+        // Re-open if input clicked
+        searchInput.addEventListener('click', function() {
+            if (this.value.trim().length > 0) {
+                searchDropdown.classList.add('active');
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>
