@@ -174,6 +174,73 @@
             justify-content: center;
             margin-top: 0.5rem;
         }
+		
+		/* --- FLIP CARD STYLING --- */
+        .poster-item {
+            width: 100%;
+            aspect-ratio: 1 / 1.414; /* Standard Poster/A4 Ratio */
+            background-color: transparent;
+            perspective: 1000px; /* Gives the 3D depth effect */
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .poster-item:hover .flip-card-inner {
+            transform: rotateY(180deg);
+            box-shadow: 0 15px 35px rgba(0, 112, 120, 0.2);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .flip-card-front {
+            background-size: cover;
+            background-position: center;
+            background-color: #eef2f1;
+        }
+
+        .flip-card-back {
+            background-color: #007078; /* Ever Teal background */
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .flip-card-back h3 {
+            color: #FFC627; /* Prime Yellow */
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .flip-card-back p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #ffffff;
+            margin: 0;
+        }
+        /* ------------------------- */
 
         /* MOBILE RESPONSIVENESS */
         @media (max-width: 900px) {
@@ -243,31 +310,95 @@
                
             </section>
 
-            <!-- 2. Values - 3 Posters -->
-            <section>
+           <section>
                 <div class="section-header">
                     <h2>Our Values</h2>
                     <p>A standardized set of 3 posters highlighting the core values that drive our daily operations and global mindset.</p>
                 </div>
-               <div class="grid-3-cols">
-    <div class="poster-item" style="background-image: url('Homepage%20Images/Courage.jpg');"></div>
-    <div class="poster-item" style="background-image: url('Homepage%20Images/Empathy.jpg');"></div>
-    <div class="poster-item" style="background-image: url('Homepage%20Images/Making%20it%20happen.jpg');"></div>
-</div>
+                
+                <div class="grid-3-cols">
+                    
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage%20Images/Courage.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Courage In Every Step</h3>
+                                <p>We act bravely, challenge the status quo, and boldly lead the way toward a sustainable future.</p>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage%20Images/Empathy.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Empathy For All</h3>
+                                <p>We listen, understand, and care for our people, our communities, and the planet we share.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage%20Images/Making%20it%20happen.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Making it happen Now</h3>
+                                <p>We are driven by action and accountability, turning visionary ideas into impactful realities.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </section>
 
-            <!-- 3. Behaviours & Principles - 4 Posters -->
             <section>
                 <div class="section-header">
                     <h2>Our Behaviours</h2>
                     <p>A comprehensive set of 4 posters detailing the actionable behaviours expected across all our teams.</p>
                 </div>
+                
                 <div class="grid-4-cols">
-                    <div class="poster-item" style="background-image: url('Homepage Images/care.jpg');"></div>
-                    <div class="poster-item" style="background-image: url('Homepage Images/boldly.jpg');"></div>
-                    <div class="poster-item" style="background-image: url('Homepage Images/One.jpg');"></div>
-                    <div class="poster-item" style="background-image: url('Homepage Images/Real.jpg');"></div>
+                    
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/care.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Lead With Care</h3>
+                                <p>We nurture an environment of safety, respect, and well-being for everyone.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/boldly.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Explore Boldly</h3>
+                                <p>We step out of our comfort zones to innovate and embrace new challenges.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/One.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Power of One</h3>
+                                <p>We collaborate seamlessly across teams and borders as one unified Suzlon.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/Real.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Remarkably Real</h3>
+                                <p>We act with authenticity, transparency, and uncompromising integrity in all we do.</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
