@@ -1,3 +1,28 @@
+.editorial-main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+html {
+    font-size: 95% !important;
+}
+/* =========================================
+           SCROLL FIX OVERRIDE (AGGRESSIVE)
+           This completely disables any scroll-snapping 
+           or locked heights from your external CSS files 
+           across the entire page and forces smooth scrolling.
+        ========================================= */
+        html, body, main, .editorial-main, .showcase-container, section {
+            scroll-snap-type: none !important;
+            scroll-behavior: smooth !important;
+            height: auto !important;
+            max-height: none !important;
+            overflow-y: visible !important; /* Forces the scrollbar back to the main browser window */
+        }
+        * {
+            scroll-snap-align: none !important;
+            scroll-snap-stop: normal !important;
+        }
+        /* ========================================= */
 /* =========================================
 
    1. VARIABLES & GLOBAL STYLES
@@ -698,9 +723,9 @@ h1, h2, h3, h4, h5, h6 {
 
     position: relative;
 
-    background: linear-gradient(rgba(10, 25, 35, 0.75), rgba(5, 15, 25, 0.85)), url('Homepage Images/SUZLON IS EVOLVING.jpg') no-repeat center center/cover;
+    background: url('Homepage Images/Evolving.jpg') no-repeat center center/cover;
 
-background-attachment: fixed; /* Creates the smooth parallax scrolling effect */
+/*background-attachment: fixed;  Creates the smooth parallax scrolling effect */
 
     color: var(--white);
 
@@ -765,7 +790,7 @@ background-attachment: fixed; /* Creates the smooth parallax scrolling effect */
 
     line-height: 1.7;
 
-    color: #C0C8C5;
+    color: #FFFFFF;
 
     margin-bottom: 3rem;
 
@@ -803,11 +828,11 @@ background-attachment: fixed; /* Creates the smooth parallax scrolling effect */
 
 .evolving-text-group .history-desc {
 
-    font-size: 0.95rem;
+    font-size: 1rem;
 
     line-height: 1.7;
 
-    color: #B5C0BC;
+    color: #ffffff;
 
     margin-bottom: 1.25rem;
 
@@ -983,138 +1008,62 @@ background-attachment: fixed; /* Creates the smooth parallax scrolling effect */
 
 
 
-/* SECTION 3: The World is Changing (Beige Redesign) */
-
-.world-changing-modern {
-
-    background-color: var(--humble-beige);
-
-    padding: 100px 5%;
-
-    
-
-}
-
-
-
-.world-changing-modern .content-wrapper {
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 4rem;
-
-    align-items: center;
-
-    max-width: 1400px;
-
-    margin: 0 auto;
-
-}
-
-
-
-.world-changing-modern h2 {
-
-    font-size: clamp(2.2rem, 3.5vw, 3.8rem);
-
-    line-height: 1.15;
-
-    margin-bottom: 2rem;
-
-    text-transform: uppercase;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 0.5rem;
-
-}
-
-
-
-.heading-green {
-
-    color: var(--emergent-green); 
-
-}
-
-
-
-.heading-yellow {
-
-    color: var(--prime-yellow); 
-
-    
-
-    display: inline-block;
-
-    width: fit-content;
-
-}
-
-
-
-.heading-green {
-
-    color: var(--green); 
-
-   
-
-    display: inline-block;
-
-    width: fit-content;
-
-}
-
-
-
-.world-changing-modern p {
-
-    font-size: 1.15rem;
-
-    line-height: 1.8;
-
-    color: #4A4A4A; 
-
-    margin-bottom: 1.5rem;
-
-}
-
-
-
-.world-changing-modern .image-content {
-
-    width: 100%;
-
-    height: 100%;
-
-    min-height: 450px;
-
+/* =========================================
+   FULL-WIDTH BANNER SECTION (SECTION 3)
+========================================= */
+.world-changing-fullwidth {
     position: relative;
-
-    box-shadow: 0 20px 40px rgba(0, 112, 120, 0.15); 
-
+    width: 100%;
+    min-height: 60vh; /* Takes up 60% of the screen height */
+    background-size: cover;
+    background-position: center;
+/*    background-attachment: fixed;  Creates a premium parallax scrolling effect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem;
+    margin: 4rem 0;
 }
 
-
-
-.world-changing-modern .image-content img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
+.banner-overlay {
     position: absolute;
-
     top: 0;
-
     left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 80, 85, 0.75); /* Dark Suzlon teal overlay */
+    z-index: 1;
+}
 
+.fullwidth-text-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.fullwidth-text-content h2 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.fullwidth-text-content .heading-light {
+    color: #ffffff;
+}
+
+.fullwidth-text-content .heading-yellow {
+    color: #FFC627; /* Prime Yellow */
+}
+
+.fullwidth-text-content p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #f4f7f6;
+    font-weight: 400;
 }
 
 
@@ -1932,7 +1881,7 @@ background-attachment: fixed; /* Creates the smooth parallax scrolling effect */
     font-size: clamp(2rem, 3.5vw, 3.5rem);
     line-height: 1.15;
     text-transform: uppercase;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
     letter-spacing: 0.5px;
 }
 
@@ -1943,9 +1892,9 @@ background-attachment: fixed; /* Creates the smooth parallax scrolling effect */
 .boap-text .yellow-highlight-block {
     color: var(--prime-yellow);
     background-color: var(--ever-teal);
-    padding: 8px 20px;
+/*    padding: 8px 20px;*/
     display: inline-block;
-    margin-top: 10px;
+/*    margin-top: 10px;*/
 }
 
 /* Responsive adjustments for mobile and tablets */
@@ -2525,4 +2474,271 @@ background-attachment: fixed; /* Creates the smooth parallax scrolling effect */
 @keyframes slideDown {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   MANIFESTO CAROUSEL 
+========================================= */
+.manifesto-carousel {
+    position: relative;
+    width: 100%;
+    height: 45rem; /* Unified height for all 3 slides */
+    overflow: hidden;
+    margin-top: 4rem;
+    background-color: #f4f7f6; /* Fallback background */
+}
+
+.carousel-track {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Navigation Arrows */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 112, 120, 0.7); /* Teal */
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.carousel-btn:hover { 
+    background: rgba(0, 112, 120, 1); 
+}
+
+.prev-btn { left: 2rem; }
+.next-btn { right: 2rem; }
+
+/* Navigation Dots */
+.carousel-dots {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid #007078; /* Teal border */
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dot.active { 
+    background: #007078; 
+}
+/* =========================================
+   SECTION 10: BRAND ON A PAGE (BOAP)
+========================================= */
+.boap-framework {
+    width: 100%;
+    font-family: 'Monda', sans-serif;
+    color: #007078; /* Default Teal text for light sections */
+}
+.boap-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    box-sizing: border-box;
+}
+.boap-grid-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.boap-label {
+    flex: 0 0 200px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    letter-spacing: 1px;
+}
+.boap-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Backgrounds & Text Colors */
+.boap-row-light { background-color: #F8F7F2; border-top: 4px solid #FFC600; }
+.boap-row-yellow { background-color: #FFC600; color: #007078; }
+.boap-row-teal { background-color: #007078; color: #ffffff; padding-bottom: 4rem; }
+.text-yellow { color: #FFC600; }
+.text-white { color: #ffffff; }
+
+/* Number Circles */
+.circle-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.circle-num.teal-bg { background-color: #007078; color: #ffffff; }
+.circle-num.yellow-bg { background-color: #FFC600; color: #007078; }
+.circle-num.small { width: 20px; height: 20px; font-size: 0.7rem; margin-right: 10px;}
+
+/* Section 1 & 2 Specifics */
+.border-bottom {
+    border-bottom: 1px solid rgba(0, 112, 120, 0.2);
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+}
+.purpose-text {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+.ambition-text {
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 500;
+    margin: 0 0 3rem 0;
+}
+
+/* 2A & 2B Points Grid */
+.points-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+.points-block {
+    display: flex;
+    gap: 2rem;
+}
+.points-header {
+    width: 140px;
+    font-size: 0.9rem;
+}
+.small-num { font-weight: 700; font-size: 0.8rem; }
+.sub-text { font-size: 0.8rem; opacity: 0.8; font-weight: 400; display: block; margin-top: 5px;}
+.points-list {
+    display: flex;
+    gap: 2rem;
+    border-left: 2px solid rgba(0, 112, 120, 0.2);
+    padding-left: 1.5rem;
+}
+.points-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.points-list li {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    border-left: 2px solid #FFC600;
+    padding-left: 10px;
+    line-height: 1.2;
+}
+
+/* Values & Behaviours Grid */
+.values-grid, .behaviours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+.behaviours-grid { color: #FFC600; }
+
+/* Diagram for Propositions (Section 5 & 6) */
+.proposition-diagram {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 4rem;
+    position: relative;
+}
+.prop-box {
+    flex: 1;
+    min-width: 320px;
+    position: relative;
+}
+.prop-top {
+    display: flex;
+    margin-bottom: 3rem;
+    border: 2px solid #80B7BB; /* Light teal lines */
+    border-bottom: none;
+    border-right: none;
+    border-top-left-radius: 20px;
+    padding: 2rem 0 0 2rem;
+}
+.cvp-box .prop-top {
+    border: none;
+    border-left: 2px solid #80B7BB;
+    border-radius: 0;
+    padding-top: 0;
+}
+.prop-lists {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+}
+.prop-lists ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.prop-lists li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 12px;
+}
+.prop-lists li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #ffffff;
+}
+.prop-bottom {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+.prop-headline {
+    font-size: clamp(2rem, 3vw, 3rem);
+    margin: 0.5rem 0 0 0;
+    line-height: 1.1;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+    .points-block { flex-direction: column; gap: 1rem; }
+    .points-list { border-left: none; padding-left: 0; border-top: 2px solid rgba(0, 112, 120, 0.2); padding-top: 1rem; }
+    .prop-top, .cvp-box .prop-top { border: none; padding: 0; margin-bottom: 2rem; }
+    .prop-lists { flex-direction: column; gap: 1rem; }
 }
