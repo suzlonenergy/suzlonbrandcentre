@@ -121,7 +121,7 @@ body {
     align-items: stretch;
     
     width: 100%;
-    min-height: 100vh; 
+    min-height: 80vh; 
     margin: 0; 
     
     scroll-snap-align: center; 
