@@ -323,7 +323,7 @@ h1, h2, h3, h4, h5, h6 {
 
     height: 100%;
 
-    background: linear-gradient(to right, rgba(0, 112, 120, 0.9), rgba(0, 112, 120, 0.6));
+    background: linear-gradient(to right, rgba(0, 31, 31, 0.4), rgba(0, 31, 31, 0.4));
 
     z-index: 2;
 
@@ -1436,7 +1436,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .support-content {
 
-    max-width: 800px;
+    max-width: 1000px;
 
     margin: 0 auto;
 
@@ -2742,3 +2742,4 @@ h1, h2, h3, h4, h5, h6 {
     .prop-top, .cvp-box .prop-top { border: none; padding: 0; margin-bottom: 2rem; }
     .prop-lists { flex-direction: column; gap: 1rem; }
 }
+
