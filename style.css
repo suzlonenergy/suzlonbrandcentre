@@ -2257,63 +2257,42 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* =========================================
-   MODERN HUB CARDS (Side-by-Side Layout)
-========================================= */
-.modern-hub {
-    background-color: var(--white);
-    border: 1px solid rgba(0, 112, 120, 0.05);
-    box-shadow: 0 20px 40px rgba(0, 112, 120, 0.08);
-    display: grid;
-    /* Splits the card: 55% image on the left, 45% text/links on the right */
-    grid-template-columns: 55% 45%; 
-    align-items: stretch;
-}
+           HUB LAYOUT OVERRIDES (Wider Image, Narrower Text)
+        ========================================= */
+        .modern-hub {
+            /* Shifts from the old 55/45 split to 65% Image / 35% Text */
+            grid-template-columns: 68% 32% !important; 
+        }
 
-.hub-visual {
-    width: 100%;
-    height: 100%;
-    min-height: 450px;
-    position: relative;
-    overflow: hidden;
-}
+        .hub-visual {
+            /* Increases the minimum height so the wider image stays proportional and grand */
+            min-height: 600px !important; 
+        }
 
-.visual-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transition: background-image 0.4s ease-in-out;
-}
+        .hub-content-grid {
+            /* Tightens the padding slightly to accommodate the narrower text column */
+            padding: 4rem 2.5rem !important; 
+        }
 
-.hub-content-grid {
-    padding: 4rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Vertically centers the text and UL */
-    gap: 2.5rem;
-}
+        /* Tablet adjustment */
+        @media (max-width: 1200px) {
+            .modern-hub {
+                grid-template-columns: 60% 40% !important; 
+            }
+            .hub-visual {
+                min-height: 500px !important;
+            }
+        }
 
-.hub-text h2 {
-    font-size: 2.2rem;
-    color: var(--ever-teal);
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-}
-
-.hub-text p {
-    font-size: 1.1rem;
-    color: #4A4A4A;
-    line-height: 1.6;
-}
-
-.hub-actions {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 1rem;
-}
+        /* Mobile adjustment */
+        @media (max-width: 900px) {
+            .modern-hub {
+                grid-template-columns: 1fr !important; 
+            }
+            .hub-visual {
+                min-height: 350px !important;
+            }
+        }
 
 /* =========================================
    INTERACTIVE GALLERY LINKS
