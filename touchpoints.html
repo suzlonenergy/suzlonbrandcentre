@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Good at Every Touchpoint | Suzlon Brand Centre</title>
+    <title>The Good Expression | Suzlon Brand Centre</title>
     
     <!-- Mandatory Monda Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,9 +12,325 @@
     
     <!-- Core Brand Stylesheet -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- Sharing the exact same CSS file to keep the layout consistent -->
     <link rel="stylesheet" href="Navpagescss.css">
+
+    <style>
+        /* =========================================
+           GLOBAL RESET (Fixes the Slider Bleed)
+        ========================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* =========================================
+           SUZLON.COM TYPOGRAPHY MATCH
+        ========================================= */
+        body, html, .editorial-main {
+            font-family: 'Monda', Arial, Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* =========================================
+           PREMIUM CHOREOGRAPHED SCROLL REVEAL 
+        ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal .showcase-canvas {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1s ease-out 0.2s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s; 
+        }
+        .reveal.active .showcase-canvas {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .reveal .showcase-controls {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out 0.4s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+        }
+        .reveal.active .showcase-controls {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           HORIZONTAL GALLERY SHOWCASE LAYOUT
+        ========================================= */
+        .hubs-container {
+            max-width: 1800px;
+            margin: 1rem auto; /* REDUCED TOP/BOTTOM GAP */
+            padding: 0 2%;
+        }
+
+        .showcase-hub {
+            background: var(--humble-beige, #F8F7F2);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.25rem; /* REDUCED INTER-HUB SPACING */
+            display: grid;
+            grid-template-columns: 75% 25%; 
+            height: calc(100vh - 120px); 
+            min-height: 500px;
+        }
+
+        /* 1. The Presentation Canvas & Slider Track */
+        .showcase-canvas {
+            width: 100%;
+            height: 100%; 
+            background-color: transparent; 
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease-in-out;
+            will-change: transform;
+        }
+
+        .slide-item {
+            flex: 0 0 100%; 
+            width: 100%;
+            height: 100%;
+            padding: 1.5rem; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .slide-item img, .slide-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+        }
+
+        /* 1b. Navigation Dots Container */
+        .slider-dots {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: rgba(0, 112, 120, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--ever-teal, #007078);
+            transform: scale(1.3);
+        }
+
+        /* 2. Control Panel */
+        .showcase-controls {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            gap: 1rem; 
+            padding: 1.5rem; 
+            background-color: transparent; 
+            border-left: none; 
+            overflow-y: auto; 
+            height: 100%; 
+        }
+
+        .showcase-info h2 {
+            font-family: 'Monda', sans-serif;
+            font-size: clamp(1.6rem, 2.2vw, 2.2rem); 
+            font-weight: 700;
+            color: var(--ever-teal, #007078);
+            text-transform: none; 
+            letter-spacing: -0.5px; 
+            margin-bottom: 0.5rem; 
+            line-height: 1.15;
+        }
+
+        .showcase-info p {
+            font-family: 'Monda', sans-serif;
+            font-size: 1rem; 
+            font-weight: 400;
+            color: #4A4A4A;
+            line-height: 1.5; 
+            margin-bottom: 1rem; 
+        }
+
+        /* =========================================
+           3. INLINE DYNAMIC NAVIGATION PILLS 
+        ========================================= */
+        .showcase-nav {
+            display: flex;
+            flex-direction: column; 
+            width: 100%;
+            gap: 0; 
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            border-bottom: 1px solid rgba(0, 112, 120, 0.15); 
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+
+        .nav-item:last-child {
+            border-bottom: none;
+        }
+
+        .nav-link {
+            flex: 1; 
+            text-align: left; 
+            padding: 1rem 0; 
+            color: var(--ever-teal, #007078);
+            text-decoration: none;
+            font-family: 'Monda', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease; 
+        }
+
+        .nav-item:hover .nav-link {
+            color: #FFC627; 
+        }
+
+        .nav-item.active-item .nav-link {
+            color: #FFC627; 
+            font-weight: 700; 
+        }
+
+        .nav-download {
+            display: none; 
+            text-decoration: none;
+            font-family: 'Monda', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            color: var(--ever-teal, #007078);
+            padding: 0.35rem 0.8rem;
+            margin-right: 0.5rem; 
+            border-radius: 50px;
+            background-color: #ffffff;
+            border: 1px solid rgba(0, 112, 120, 0.15);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-download:hover {
+            background-color: var(--ever-teal, #007078);
+            color: #ffffff;
+            border-color: var(--ever-teal, #007078);
+        }
+
+        .nav-item.active-item .nav-download {
+            display: inline-block;
+            animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Support section spacing adjustment */
+
+        .support-section {
+            margin-top: 2rem;
+            padding: 3rem 1rem;
+        }
+
+        /* =========================================
+           4. RESPONSIVE MEDIA QUERIES 
+        ========================================= */
+        @media (max-width: 1200px) {
+            .showcase-hub {
+                grid-template-columns: 65% 35%;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .showcase-hub {
+                grid-template-columns: 1fr;
+                height: auto;
+                min-height: unset;
+                margin-bottom: 1.5rem;
+            }
+            .showcase-canvas {
+                min-height: 400px;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(0, 112, 120, 0.1);
+            }
+            .showcase-controls {
+                padding: 1.5rem;
+                height: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 2.5rem 5% !important;
+            }
+            .page-hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .page-hero-content p {
+                font-size: 0.95rem !important;
+            }
+            .showcase-hub {
+                margin-bottom: 1.25rem;
+            }
+            .showcase-canvas {
+                min-height: 300px;
+                padding: 0.5rem;
+            }
+            .slide-item {
+                padding: 0.75rem;
+            }
+            .showcase-controls {
+                padding: 1.25rem;
+                gap: 0.75rem;
+            }
+            .showcase-info h2 {
+                font-size: 1.35rem;
+            }
+            .showcase-info p {
+                font-size: 0.9rem;
+                margin-bottom: 0.75rem;
+            }
+            .nav-link {
+                padding: 0.75rem 0;
+                font-size: 0.75rem;
+            }
+            .slider-dots {
+                bottom: 0.75rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -25,178 +341,146 @@
                 <img src="Homepage Images/Asset 1@2x-8.png" alt="Suzlon Logo" style="height: 45px; border: none;">
             </a>
         </div>
-         <nav class="nav-links">
-        
-        <a href="TheGoodIdentity.html" >The Good Identity</a>
-            <a href="TheGoodExpression.html" >The Good Expression</a>
-            <a href="touchpoints.html"  class="active-nav">Good at Every Touchpoint</a>
-			<a href="thegoodvoice.html" >Speak with Goodness</a>
-			<a href="good-energy-people.html">The Good Energy People</a>
-    </nav>
+        <nav class="nav-links">
+            <a href="TheGoodIdentity.html">The Good Identity</a>
+            <a href="TheGoodExpression.html" class="active-nav">The Good Expression</a>
+            <a href="touchpoints.html">Good at Every Touchpoint</a>
+            <a href="thegoodvoice.html">Speak with Goodness</a>
+            <a href="good-energy-people.html">The Good Energy People</a>
+        </nav>
     </header>
 
-    <main class="editorial-main">
+    <main class="editorial-main" style="margin-top: 0; padding-top: 0; background-color: transparent;">
         
-        <!-- Full-Width Page Hero -->
-<section class="page-hero" style="margin-top: 0; margin-bottom: 0; padding: 6rem 8%; background: url('Homepage Images/Good at Every Touchpoint.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-sizing: border-box;">
-    
-    <div class="page-hero-content" style="text-align: center; margin: 0 auto; max-width: 1200px;">
-        <h1 style="margin-bottom: 0.5rem; line-height: 1.2; color: #ffffff;">Good at Every Touchpoint</h1>
-        <p style="margin-top: 0; font-size: 1.2rem; line-height: 1.6; color: #ffffff;">Preview our brand applications and download ready-to-use templates to ensure consistency across digital, physical, and operational environments.</p>
-    </div>
-    
-</section>
-        <!-- Full-Width Hubs Container -->
+        <!-- Tightened Page Hero -->
+        <section class="page-hero" style="margin-top: 0; margin-bottom: 0; padding: 3.5rem 8%; background: url('Homepage Images/the good expression.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-sizing: border-box;">
+            <div class="page-hero-content reveal" style="text-align: center; margin: 0 auto; max-width: 1200px;">
+                <h1 style="margin-bottom: 0.4rem; line-height: 1.2; color: #ffffff;">The Good Expression</h1>
+                <p style="margin-top: 0; font-size: 1.1rem; line-height: 1.5; color: #ffffff;">Defining our look and feel: iconography, photography, motion, and layouts that flow.</p>
+            </div>
+        </section>
+
         <div class="hubs-container">
 
-            <!-- HUB 1: Ready to Use -->
-            <article class="modern-hub">
-                <div class="hub-visual cut-top-right">
-                    <div class="visual-bg"></div>
+            <!-- HUB 1: Icons with Meaning -->
+            <article class="showcase-hub reveal">
+                <div class="showcase-canvas">
+                    <div class="slider-track"></div>
+                    <div class="slider-dots"></div>
                 </div>
                 
-                <div class="hub-content-grid">
-                    <div class="hub-text">
-                        <h2>Ready to Use</h2>
-                        <p>Essential templates and assets built for immediate application. Download these tools to create on-brand communications effortlessly.</p>
-                        
-                        <ul class="interactive-links">
-                            <li>
-                                <a href="#" class="active-link" data-image="Homepage Images/PPT.jpg">
-                                    Presentation Templates
-                                </a>
-                                <!-- Dynamic Inline Download Button -->
-                                <div class="inline-download">
-                                    <a href="https://suzlonenergy365-my.sharepoint.com/:p:/g/personal/47001_suzlon_com/IQDZ8Oi2UmMDTLXPlUHW2x3IAX2yDcyfMA0SrHI9NTRghdY?e=gHpMEM" class="inline-btn" target="_blank">
-                                        Download (.ppt)
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#" data-image="Homepage Images/word template.jpg">
-                                    Word Templates
-                                </a>
-                                <!-- Dynamic Inline Download Button -->
-                                <div class="inline-download">
-                                    <a href="Homepage Images/Word Template.docx" class="inline-btn" download>
-                                        Download (.doc)
-                                    </a>
-                                </div>
-                            </li>
-                            <li><a href="#" data-image="Homepage Images/Social Media Assets.jpg">Social Media Assets</a></li>
-                            <li><a href="#" data-image="Homepage Images/E-mail signature.jpg">Email Signatures</a></li>
-<!--                            <li><a href="#" data-image="Homepage Images/Stationery_Mockup.png">Stationery</a></li>-->
-<!--
-                            <li><a href="#" data-image="Homepage Images/Cert_Mockup.png">Certificates</a></li>
-                            <li><a href="#" data-image="Homepage Images/Proposal_Mockup.png">Proposals</a></li>
-                            <li><a href="#" data-image="Homepage Images/VCard_Front.png">Visiting Cards</a></li>
--->
-                        </ul>
+                <div class="showcase-controls">
+                    <div class="showcase-info">
+                        <h2>Icons with Meaning</h2>
+                        <p>Our iconography system is designed to be functional, clear, and distinct, helping users navigate information effortlessly while reflecting our new-age identity.</p>
                     </div>
-<!--
-                    <div class="hub-actions"> 
-                        <a href="Downloads/Suzlon_ReadyToUse_MasterKit.zip" class="contact-btn" download>
-                            Download All Toolkit (.ZIP) <span class="arrow">&darr;</span>
-                        </a>
+                    <div class="showcase-nav">
+                        <div class="nav-item active-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Icons with Meaning/2x/Icon 1.png">Overview</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Icons with Meaning/2x/Icon 5.png">Sizing</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Icons with Meaning/2x/Icon 2.png">Single tone line icons</a>
+                            <a href="Homepage Images/Icons/Line Icon.zip" class="nav-download" target="_blank">Download &darr;</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Icons with Meaning/2x/Icon 3.png">Dual tone line icons</a>
+                            <a href="Homepage Images/Icons/Dual Color Icon.zip" class="nav-download" target="_blank">Download &darr;</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Icons with Meaning/2x/Icon 4.png">Solid icons</a>
+                            <a href="Homepage Images/Icons/Solid Icon.zip" class="nav-download" target="_blank">Download &darr;</a>
+                        </div>
                     </div>
--->
                 </div>
             </article>
 
-            <!-- HUB 2: Digitally Good -->
-            <article class="modern-hub">
-                <div class="hub-visual cut-bottom-left">
-                    <div class="visual-bg"></div>
+            <!-- HUB 2: Images with Warmth -->
+            <article class="showcase-hub reveal">
+                <div class="showcase-canvas">
+                    <div class="slider-track"></div>
+                    <div class="slider-dots"></div>
                 </div>
                 
-                <div class="hub-content-grid">
-                    <div class="hub-text">
-                        <h2>Digitally Good</h2>
-                        <p>Guidelines and UI components that ensure a consistent, engaging experience across all digital screens and online platforms.</p>
-                        
-                        <ul class="interactive-links">
-<!--                            <li><a href="#" class="active-link" data-image="Homepage Images/Intranet_Mockup.png">SharePoint & Intranet Use</a></li>-->
-                            <li><a href="#" class="active-link" data-image="Homepage Images/Suzlon Design Exploration_Feb 3_Page_28.jpg">Social Media Expression</a></li>
-                            <li><a href="#" data-image="Homepage Images/26Mar26_IB_for_Suzlon_emailers_v1_Page_2.jpg">Emailers</a></li>
-							<li><a href="#" data-image="Homepage Images/Suzlon Design Exploration_Feb 3_Page_12.jpg">Banners</a></li>
-<!--
-                            <li>
-                                <a href="#" data-image="Homepage Images/UI_Elements.png">
-                                    UI Elements
-                                </a>
-                                 Dynamic Inline Download Button 
-                                <div class="inline-download">
-                                    <a href="Downloads/Suzlon_UI_Elements.zip" class="inline-btn" download>
-                                        Download Assets (.ZIP)
-                                    </a>
-                                </div>
-                            </li>
--->
-                        </ul>
+                <div class="showcase-controls">
+                    <div class="showcase-info">
+                        <h2>Images with Warmth</h2>
+                        <p>Our photography style captures the human element and the scale of our impact, focusing on authenticity, natural energy, and the communities we empower.</p>
                     </div>
-<!--
-                    <div class="hub-actions">
-                        <a href="Downloads/Suzlon_Digital_Assets.zip" class="contact-btn" download>
-                            Download Digital Kit (.ZIP) <span class="arrow">&darr;</span>
-                        </a>
+                    <div class="showcase-nav">
+                        <div class="nav-item active-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Images with Warmth/2x/Images with Warmth 1.png,Homepage Images/Images with Warmth/2x/Images with Warmth 2.png,Homepage Images/Images with Warmth/2x/Images with Warmth 3.png,Homepage Images/Images with Warmth/2x/Images with Warmth 4.png">Photography Style</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Images with Warmth/Composition Principles/2x/Composition Principles 1.png,Homepage Images/Images with Warmth/Composition Principles/2x/Composition Principles 2.png,Homepage Images/Images with Warmth/Composition Principles/2x/Composition Principles 3.png,Homepage Images/Images with Warmth/Composition Principles/2x/Composition Principles 4.png,Homepage Images/Images with Warmth/Composition Principles/2x/Composition Principles 5.png">Composition Principles</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Images with Warmth/Selection & Editing Guidance/2x/Selection & Editing Guidance 1.png,Homepage Images/Images with Warmth/Selection & Editing Guidance/2x/Selection & Editing Guidance 2.png,Homepage Images/Images with Warmth/Selection & Editing Guidance/2x/Selection & Editing Guidance 3.png,Homepage Images/Images with Warmth/Selection & Editing Guidance/2x/Selection & Editing Guidance 4.png,Homepage Images/Images with Warmth/Selection & Editing Guidance/2x/Selection & Editing Guidance 5.png">Selection & Editing Guidance</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Images with Warmth/Selection & Editing Guidance/2x/Selection & Editing Guidance 6.png">Image Don'ts</a>
+                        </div>
                     </div>
--->
                 </div>
             </article>
 
-            <!-- HUB 3: Good Spaces -->
-            <article class="modern-hub">
-                <div class="hub-visual cut-top-right">
-                    <div class="visual-bg"></div>
+            <!-- HUB 3: Motion with Purpose -->
+            <article class="showcase-hub reveal">
+                <div class="showcase-canvas">
+                    <div class="slider-track"></div>
+                    <div class="slider-dots"></div>
                 </div>
                 
-                <div class="hub-content-grid">
-                    <div class="hub-text">
-                        <h2>Good Spaces</h2>
-                        <p>Branding the physical environment. See how our identity translates into corporate offices, large-scale events, and architectural signage.</p>
-                        
-                        <ul class="interactive-links">
-<!--                            <li><a href="#" class="active-link" data-image="Homepage Images/Signage1.png">Signage</a></li>-->
-                            <li><a href="#" class="active-link" data-image="Homepage Images/Office Branding.jpeg">Office Branding</a></li>
-                            <li><a href="#" data-image="Homepage Images/Site Branding.jpeg">Site Branding</a></li>
-                            <li><a href="#" data-image="Homepage Images/Booth.jpeg">Event & Booth Branding</a></li>
-                        </ul>
+                <div class="showcase-controls">
+                    <div class="showcase-info">
+                        <h2>Motion with Purpose</h2>
+                        <p>Bringing our brand to life across digital touchpoints with motion that feels natural, energetic, and purposefully paced.</p>
                     </div>
-<!--
-                    <div class="hub-actions">
-                        <a href="Downloads/Suzlon_Spaces_Guidelines.pdf" class="contact-btn" target="_blank">
-                            View Specs (.PDF) <span class="arrow">&rarr;</span>
-                        </a>
+                    <div class="showcase-nav">
+                        <div class="nav-item active-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Motion/Motion Principles.mp4">Motion Principles</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-slider="Homepage Images/Motion with Purpose/Pace & Behavior/2x/Pace & Behavior 1.png,Homepage Images/Motion with Purpose/Pace & Behavior/2x/Pace & Behavior 2.png">Pace & Behavior</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Motion/Transitions.mp4">Transitions</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Motion with Purpose/2x/Don'ts.png">Don'ts</a>
+                        </div>
                     </div>
--->
                 </div>
             </article>
 
-            <!-- HUB 4: Good Operations -->
-            <article class="modern-hub">
-                <div class="hub-visual cut-both">
-                    <div class="visual-bg"></div>
+            <!-- HUB 4: Layouts that Flow -->
+            <article class="showcase-hub reveal">
+                <div class="showcase-canvas">
+                    <div class="slider-track"></div>
+                    <div class="slider-dots"></div>
                 </div>
                 
-                <div class="hub-content-grid">
-                    <div class="hub-text">
-                        <h2>Good Operations</h2>
-                        <p>Showcasing the brand on the ground. Specifications for industrial application, from product marking to safety gear and logistics fleets.</p>
-                        
-                        <ul class="interactive-links">
-                            <li><a href="#" class="active-link" data-image="Homepage Images/Product Branding.jpg">Product Branding</a></li>
-                            <li><a href="#" data-image="Homepage Images/Logistics.jpg">Logistics</a></li>
-                            <li><a href="#" data-image="Homepage Images/Uniforms.png">Uniforms</a></li>
-<!--                            <li><a href="#" data-image="Homepage Images/Plant_App.png">Plant & Site Applications</a></li>-->
-                        </ul>
+                <div class="showcase-controls">
+                    <div class="showcase-info">
+                        <h2>Layouts that Flow</h2>
+                        <p>A structural grid system that ensures balance, guides the eye, and creates a consistent rhythm across all printed and digital brand communications.</p>
                     </div>
-<!--
-                    <div class="hub-actions">
-                        <a href="Downloads/Suzlon_Operations_Kit.pdf" class="contact-btn" target="_blank">
-                            View Specs (.PDF) <span class="arrow">&rarr;</span>
-                        </a>
+                    <div class="showcase-nav">
+                        <div class="nav-item active-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Layouts that Flow/2x/Layout 1.png,Homepage Images/Layouts that Flow/2x/Layout 2.png,Homepage Images/Layouts that Flow/2x/Layout 3.png,Homepage Images/Layouts that Flow/2x/Layout 4.png">Layout</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Layouts that Flow/Grids/2x/Grids 1.png,Homepage Images/Layouts that Flow/Grids/2x/Grids 2.png,Homepage Images/Layouts that Flow/Grids/2x/Grids 3.png,Homepage Images/Layouts that Flow/Grids/2x/Grids 4.png">Grids</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Layouts that Flow/Grids/2x/Grids 4.png,Homepage Images/Layouts that Flow/Grids/2x/Grids 5.png,Homepage Images/Layouts that Flow/Grids/2x/Grids 6.png">Logo Placement</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link" data-image="Homepage Images/Layouts that Flow/Don'ts/2x/Donts 1.png,Homepage Images/Layouts that Flow/Don'ts/2x/Donts 2.png,Homepage Images/Layouts that Flow/Don'ts/2x/Donts 3.png">Don'ts</a>
+                        </div>
                     </div>
--->
                 </div>
             </article>
 
@@ -204,45 +488,234 @@
     </main>
     
     <!-- Support / Contact Section -->
-    <footer class="support-section">
+    <footer class="support-section reveal">
         <div class="support-content">
-            <h2>Need help applying the brand?</h2>
-            <p>If you require custom dimensions or a specific file format not provided in the template kits, reach out to the central studio.</p>
+            <h2>Need help with these resources?</h2>
+            <p>Feel free to reach out and one of our team members will get back to you as soon as possible.</p>
             <div>
                 <a href="mailto:corpcom@suzlon.com" class="contact-btn">
-                    Contact Central Studio <span class="arrow">&rarr;</span>
+                    Contact Corporate Communications <span class="arrow">&rarr;</span>
                 </a>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript to handle standard images while ignoring download action buttons -->
+    <!-- JavaScript supporting true Infinite loop sliding & Video Hover Pausing -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const hubs = document.querySelectorAll('.modern-hub');
+            
+            // 1. SCROLL REVEAL OBSERVER
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => revealOnScroll.observe(el));
+
+
+            // 2. MASTER HUB LOGIC
+            const hubs = document.querySelectorAll('.showcase-hub');
             
             hubs.forEach(hub => {
-                const visualBg = hub.querySelector('.visual-bg');
-                // Uses :not(.inline-btn) so clicking the download button doesn't trigger the image switcher conflict
-                const links = hub.querySelectorAll('.interactive-links a:not(.inline-btn)');
+                const sliderTrack = hub.querySelector('.slider-track');
+                const dotsContainer = hub.querySelector('.slider-dots');
+                const canvas = hub.querySelector('.showcase-canvas');
+                const navLinks = hub.querySelectorAll('.nav-link');
+                
+                let currentMediaUrls = [];
+                let currentSlideIndex = 0;
+                let autoSlideInterval = null;
+                let isBlinkEffect = false;
 
-                links.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
+                const goToSlide = (index) => {
+                    if (currentMediaUrls.length === 0) return;
+                    
+                    currentSlideIndex = index;
+                    
+                    if (isBlinkEffect) {
+                        // Blink/Fade transition logic
+                        const slides = sliderTrack.querySelectorAll('.slide-item');
+                        slides.forEach((slide, idx) => {
+                            if (idx === currentSlideIndex) {
+                                slide.style.display = 'flex';
+                                setTimeout(() => { slide.style.opacity = '1'; }, 50);
+                            } else {
+                                slide.style.opacity = '0';
+                                setTimeout(() => { 
+                                    if(currentSlideIndex !== idx) slide.style.display = 'none'; 
+                                }, 300);
+                            }
+                        });
+                        sliderTrack.style.transform = 'translateX(0%)';
                         
-                        links.forEach(sibling => sibling.classList.remove('active-link'));
-                        this.classList.add('active-link');
-
-                        const singleImage = this.getAttribute('data-image');
-
-                        if (singleImage) {
-                            visualBg.style.backgroundImage = `url('${singleImage}')`;
+                        if (dotsContainer) {
+                            Array.from(dotsContainer.children).forEach((dot, idx) => {
+                                dot.classList.toggle('active', idx === currentSlideIndex);
+                            });
                         }
+                    } else {
+                        // Restore smooth CSS transition for sliding
+                        sliderTrack.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease-in-out';
+                        sliderTrack.style.transform = `translateX(calc(-${currentSlideIndex * 100}%))`;
+                        
+                        // Map the clone slide (at the end) back to dot 0
+                        const activeDotIndex = currentSlideIndex % currentMediaUrls.length;
+                        if (dotsContainer) {
+                            Array.from(dotsContainer.children).forEach((dot, idx) => {
+                                dot.classList.toggle('active', idx === activeDotIndex);
+                            });
+                        }
+
+                        // Infinite loop magic: Wait for transition to end, then instantly jump back to real 0
+                        if (currentSlideIndex === currentMediaUrls.length) {
+                            setTimeout(() => {
+                                sliderTrack.style.transition = 'none'; // Turn off transition for instant jump
+                                currentSlideIndex = 0;
+                                sliderTrack.style.transform = `translateX(0%)`;
+                            }, 800); // 800ms matches the CSS transition duration
+                        }
+                    }
+                };
+
+                const startAutoSlide = () => {
+                    if (autoSlideInterval) clearInterval(autoSlideInterval);
+                    if (currentMediaUrls.length > 1) {
+                        autoSlideInterval = setInterval(() => {
+                            if (isBlinkEffect) {
+                                goToSlide((currentSlideIndex + 1) % currentMediaUrls.length);
+                            } else {
+                                goToSlide(currentSlideIndex + 1);
+                            }
+                        }, 3500);
+                    }
+                };
+
+                const stopAutoSlide = () => {
+                    if (autoSlideInterval) {
+                        clearInterval(autoSlideInterval);
+                        autoSlideInterval = null;
+                    }
+                };
+
+                // Pause on hover + Video Hover Pausing Logic
+                if (canvas) {
+                    canvas.addEventListener('mouseenter', () => {
+                        stopAutoSlide();
+                        const videos = canvas.querySelectorAll('video');
+                        videos.forEach(video => video.pause());
+                    });
+                    canvas.addEventListener('mouseleave', () => {
+                        startAutoSlide();
+                        const videos = canvas.querySelectorAll('video');
+                        videos.forEach(video => video.play());
+                    });
+                }
+
+                // Render HTML for track
+                const renderTrack = () => {
+                    sliderTrack.innerHTML = '';
+                    sliderTrack.style.transition = 'none'; 
+                    
+                    currentMediaUrls.forEach((url, idx) => {
+                        const slide = document.createElement('div');
+                        slide.className = 'slide-item';
+                        
+                        if (isBlinkEffect) {
+                            slide.style.position = 'absolute';
+                            slide.style.top = '0';
+                            slide.style.left = '0';
+                            slide.style.opacity = idx === 0 ? '1' : '0';
+                            slide.style.display = idx === 0 ? 'flex' : 'none';
+                        }
+                        
+                        if (url.toLowerCase().endsWith('.mp4')) {
+                            slide.innerHTML = `<video src="${url}" autoplay loop muted playsinline></video>`;
+                        } else {
+                            slide.innerHTML = `<img src="${url}" alt="Showcase Media">`;
+                        }
+                        sliderTrack.appendChild(slide);
+                    });
+
+                    // CLONE THE FIRST SLIDE FOR SEAMLESS INFINITE LOOPING
+                    if (currentMediaUrls.length > 1 && !isBlinkEffect) {
+                        const firstClone = sliderTrack.children[0].cloneNode(true);
+                        firstClone.classList.add('slide-clone');
+                        sliderTrack.appendChild(firstClone);
+                    }
+
+                    // Render Dots
+                    if (dotsContainer) {
+                        dotsContainer.innerHTML = '';
+                        if (currentMediaUrls.length > 1) {
+                            dotsContainer.style.display = 'flex';
+                            currentMediaUrls.forEach((_, idx) => {
+                                const dot = document.createElement('div');
+                                dot.className = `dot ${idx === 0 ? 'active' : ''}`;
+                                dot.addEventListener('click', () => {
+                                    stopAutoSlide();
+                                    
+                                    if (currentSlideIndex === currentMediaUrls.length && !isBlinkEffect) {
+                                        sliderTrack.style.transition = 'none';
+                                        currentSlideIndex = 0;
+                                        sliderTrack.style.transform = `translateX(0%)`;
+                                        void sliderTrack.offsetWidth;
+                                    }
+                                    
+                                    goToSlide(idx);
+                                    startAutoSlide();
+                                });
+                                dotsContainer.appendChild(dot);
+                            });
+                        } else {
+                            dotsContainer.style.display = 'none';
+                        }
+                    }
+
+                    if (currentMediaUrls.length > 1) {
+                        currentSlideIndex = 0;
+                        sliderTrack.style.transform = 'translateX(0%)';
+                        startAutoSlide();
+                    } else {
+                        stopAutoSlide();
+                        sliderTrack.style.transform = 'translateX(0%)';
+                    }
+                };
+
+                // Link Click Logic
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault(); 
+                        
+                        const allItems = hub.querySelectorAll('.nav-item');
+                        allItems.forEach(item => item.classList.remove('active-item'));
+                        this.closest('.nav-item').classList.add('active-item');
+
+                        isBlinkEffect = this.getAttribute('data-effect') === 'blink';
+
+                        const rawMedia = this.getAttribute('data-slider') || this.getAttribute('data-image');
+                        if (!rawMedia) return;
+
+                        currentMediaUrls = rawMedia.split(',').map(url => url.trim()).filter(Boolean);
+
+                        sliderTrack.style.opacity = '0';
+                        stopAutoSlide();
+                        
+                        setTimeout(() => {
+                            renderTrack();
+                            sliderTrack.style.opacity = '1';
+                        }, 200);
                     });
                 });
 
-                // Auto-load the default image on page load
-                const defaultLink = hub.querySelector('.active-link');
+                // Init default active tab on load
+                const defaultLink = hub.querySelector('.active-item .nav-link');
                 if (defaultLink) {
                     defaultLink.click(); 
                 }
