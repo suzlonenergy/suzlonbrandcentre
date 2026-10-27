@@ -15,6 +15,81 @@
 
     <!-- Sharing the exact same CSS file to keep the layout consistent -->
     <link rel="stylesheet" href="Navpagescss.css">
+
+    <style>
+        /* =========================================
+           GLOBAL RESET & TYPOGRAPHY
+        ========================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body, html, .editorial-main {
+            font-family: 'Monda', Arial, Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* =========================================
+           PREMIUM CHOREOGRAPHED SCROLL REVEAL 
+        ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal .hub-visual {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1s ease-out 0.2s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s; 
+        }
+        .reveal.active .hub-visual {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .reveal .hub-content-grid {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out 0.4s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+        }
+        .reveal.active .hub-content-grid {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           LAYOUT & SPACING
+        ========================================= */
+        .hubs-container {
+            max-width: 1800px;
+            margin: 1rem auto;
+            padding: 0 2%;
+        }
+
+        .modern-hub {
+            margin-bottom: 1.25rem;
+        }
+
+        .support-section {
+            margin-top: 2rem;
+            padding: 3rem 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 2.5rem 5% !important;
+            }
+            .modern-hub {
+                margin-bottom: 1.25rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -25,32 +100,30 @@
                 <img src="Homepage Images/Asset 1@2x-8.png" alt="Suzlon Logo" style="height: 45px; border: none;">
             </a>
         </div>
-         <nav class="nav-links">
-        
-        <a href="TheGoodIdentity.html" >The Good Identity</a>
-            <a href="TheGoodExpression.html" >The Good Expression</a>
-            <a href="touchpoints.html"  class="active-nav">Good at Every Touchpoint</a>
-			<a href="thegoodvoice.html" >Speak with Goodness</a>
-			<a href="good-energy-people.html">The Good Energy People</a>
-    </nav>
+        <nav class="nav-links">
+            <a href="TheGoodIdentity.html">The Good Identity</a>
+            <a href="TheGoodExpression.html">The Good Expression</a>
+            <a href="touchpoints.html" class="active-nav">Good at Every Touchpoint</a>
+            <a href="thegoodvoice.html">Speak with Goodness</a>
+            <a href="good-energy-people.html">The Good Energy People</a>
+        </nav>
     </header>
 
     <main class="editorial-main">
         
-        <!-- Full-Width Page Hero -->
-<section class="page-hero" style="margin-top: 0; margin-bottom: 0; padding: 6rem 8%; background: url('Homepage Images/Good at Every Touchpoint.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-sizing: border-box;">
-    
-    <div class="page-hero-content" style="text-align: center; margin: 0 auto; max-width: 1200px;">
-        <h1 style="margin-bottom: 0.5rem; line-height: 1.2; color: #ffffff;">Good at Every Touchpoint</h1>
-        <p style="margin-top: 0; font-size: 1.2rem; line-height: 1.6; color: #ffffff;">Preview our brand applications and download ready-to-use templates to ensure consistency across digital, physical, and operational environments.</p>
-    </div>
-    
-</section>
+        <!-- Page Hero with Scroll Reveal -->
+        <section class="page-hero" style="margin-top: 0; margin-bottom: 0; padding: 3.5rem 8%; background: url('Homepage Images/Good at Every Touchpoint.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-sizing: border-box;">
+            <div class="page-hero-content reveal" style="text-align: center; margin: 0 auto; max-width: 1200px;">
+                <h1 style="margin-bottom: 0.4rem; line-height: 1.2; color: #ffffff;">Good at Every Touchpoint</h1>
+                <p style="margin-top: 0; font-size: 1.1rem; line-height: 1.5; color: #ffffff;">Preview our brand applications and download ready-to-use templates to ensure consistency across digital, physical, and operational environments.</p>
+            </div>
+        </section>
+
         <!-- Full-Width Hubs Container -->
         <div class="hubs-container">
 
             <!-- HUB 1: Ready to Use -->
-            <article class="modern-hub">
+            <article class="modern-hub reveal">
                 <div class="hub-visual cut-top-right">
                     <div class="visual-bg"></div>
                 </div>
@@ -65,7 +138,6 @@
                                 <a href="#" class="active-link" data-image="Homepage Images/PPT.jpg">
                                     Presentation Templates
                                 </a>
-                                <!-- Dynamic Inline Download Button -->
                                 <div class="inline-download">
                                     <a href="https://suzlonenergy365-my.sharepoint.com/:p:/g/personal/47001_suzlon_com/IQDZ8Oi2UmMDTLXPlUHW2x3IAX2yDcyfMA0SrHI9NTRghdY?e=gHpMEM" class="inline-btn" target="_blank">
                                         Download (.ppt)
@@ -76,7 +148,6 @@
                                 <a href="#" data-image="Homepage Images/word template.jpg">
                                     Word Templates
                                 </a>
-                                <!-- Dynamic Inline Download Button -->
                                 <div class="inline-download">
                                     <a href="Homepage Images/Word Template.docx" class="inline-btn" download>
                                         Download (.doc)
@@ -85,26 +156,13 @@
                             </li>
                             <li><a href="#" data-image="Homepage Images/Social Media Assets.jpg">Social Media Assets</a></li>
                             <li><a href="#" data-image="Homepage Images/E-mail signature.jpg">Email Signatures</a></li>
-<!--                            <li><a href="#" data-image="Homepage Images/Stationery_Mockup.png">Stationery</a></li>-->
-<!--
-                            <li><a href="#" data-image="Homepage Images/Cert_Mockup.png">Certificates</a></li>
-                            <li><a href="#" data-image="Homepage Images/Proposal_Mockup.png">Proposals</a></li>
-                            <li><a href="#" data-image="Homepage Images/VCard_Front.png">Visiting Cards</a></li>
--->
                         </ul>
                     </div>
-<!--
-                    <div class="hub-actions"> 
-                        <a href="Downloads/Suzlon_ReadyToUse_MasterKit.zip" class="contact-btn" download>
-                            Download All Toolkit (.ZIP) <span class="arrow">&darr;</span>
-                        </a>
-                    </div>
--->
                 </div>
             </article>
 
             <!-- HUB 2: Digitally Good -->
-            <article class="modern-hub">
+            <article class="modern-hub reveal">
                 <div class="hub-visual cut-bottom-left">
                     <div class="visual-bg"></div>
                 </div>
@@ -115,37 +173,16 @@
                         <p>Guidelines and UI components that ensure a consistent, engaging experience across all digital screens and online platforms.</p>
                         
                         <ul class="interactive-links">
-<!--                            <li><a href="#" class="active-link" data-image="Homepage Images/Intranet_Mockup.png">SharePoint & Intranet Use</a></li>-->
                             <li><a href="#" class="active-link" data-image="Homepage Images/Suzlon Design Exploration_Feb 3_Page_28.jpg">Social Media Expression</a></li>
                             <li><a href="#" data-image="Homepage Images/26Mar26_IB_for_Suzlon_emailers_v1_Page_2.jpg">Emailers</a></li>
-							<li><a href="#" data-image="Homepage Images/Suzlon Design Exploration_Feb 3_Page_12.jpg">Banners</a></li>
-<!--
-                            <li>
-                                <a href="#" data-image="Homepage Images/UI_Elements.png">
-                                    UI Elements
-                                </a>
-                                 Dynamic Inline Download Button 
-                                <div class="inline-download">
-                                    <a href="Downloads/Suzlon_UI_Elements.zip" class="inline-btn" download>
-                                        Download Assets (.ZIP)
-                                    </a>
-                                </div>
-                            </li>
--->
+                            <li><a href="#" data-image="Homepage Images/Suzlon Design Exploration_Feb 3_Page_12.jpg">Banners</a></li>
                         </ul>
                     </div>
-<!--
-                    <div class="hub-actions">
-                        <a href="Downloads/Suzlon_Digital_Assets.zip" class="contact-btn" download>
-                            Download Digital Kit (.ZIP) <span class="arrow">&darr;</span>
-                        </a>
-                    </div>
--->
                 </div>
             </article>
 
             <!-- HUB 3: Good Spaces -->
-            <article class="modern-hub">
+            <article class="modern-hub reveal">
                 <div class="hub-visual cut-top-right">
                     <div class="visual-bg"></div>
                 </div>
@@ -156,24 +193,16 @@
                         <p>Branding the physical environment. See how our identity translates into corporate offices, large-scale events, and architectural signage.</p>
                         
                         <ul class="interactive-links">
-<!--                            <li><a href="#" class="active-link" data-image="Homepage Images/Signage1.png">Signage</a></li>-->
                             <li><a href="#" class="active-link" data-image="Homepage Images/Office Branding.jpeg">Office Branding</a></li>
                             <li><a href="#" data-image="Homepage Images/Site Branding.jpeg">Site Branding</a></li>
                             <li><a href="#" data-image="Homepage Images/Booth.jpeg">Event & Booth Branding</a></li>
                         </ul>
                     </div>
-<!--
-                    <div class="hub-actions">
-                        <a href="Downloads/Suzlon_Spaces_Guidelines.pdf" class="contact-btn" target="_blank">
-                            View Specs (.PDF) <span class="arrow">&rarr;</span>
-                        </a>
-                    </div>
--->
                 </div>
             </article>
 
             <!-- HUB 4: Good Operations -->
-            <article class="modern-hub">
+            <article class="modern-hub reveal">
                 <div class="hub-visual cut-both">
                     <div class="visual-bg"></div>
                 </div>
@@ -187,24 +216,16 @@
                             <li><a href="#" class="active-link" data-image="Homepage Images/Product Branding.jpg">Product Branding</a></li>
                             <li><a href="#" data-image="Homepage Images/Logistics.jpg">Logistics</a></li>
                             <li><a href="#" data-image="Homepage Images/Uniforms.png">Uniforms</a></li>
-<!--                            <li><a href="#" data-image="Homepage Images/Plant_App.png">Plant & Site Applications</a></li>-->
                         </ul>
                     </div>
-<!--
-                    <div class="hub-actions">
-                        <a href="Downloads/Suzlon_Operations_Kit.pdf" class="contact-btn" target="_blank">
-                            View Specs (.PDF) <span class="arrow">&rarr;</span>
-                        </a>
-                    </div>
--->
                 </div>
             </article>
 
         </div>
     </main>
     
-    <!-- Support / Contact Section -->
-    <footer class="support-section">
+    <!-- Support / Contact Section with Scroll Reveal -->
+    <footer class="support-section reveal">
         <div class="support-content">
             <h2>Need help applying the brand?</h2>
             <p>If you require custom dimensions or a specific file format not provided in the template kits, reach out to the central studio.</p>
@@ -216,14 +237,31 @@
         </div>
     </footer>
 
-    <!-- JavaScript to handle standard images while ignoring download action buttons -->
+    <!-- JavaScript to handle Scroll Reveal Observer & Interactive Media Switcher -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. SCROLL REVEAL OBSERVER
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => revealOnScroll.observe(el));
+
+
+            // 2. INTERACTIVE HUB MEDIA SWITCHER
             const hubs = document.querySelectorAll('.modern-hub');
             
             hubs.forEach(hub => {
                 const visualBg = hub.querySelector('.visual-bg');
-                // Uses :not(.inline-btn) so clicking the download button doesn't trigger the image switcher conflict
                 const links = hub.querySelectorAll('.interactive-links a:not(.inline-btn)');
 
                 links.forEach(link => {
@@ -241,7 +279,7 @@
                     });
                 });
 
-                // Auto-load the default image on page load
+                // Auto-load default active image on load
                 const defaultLink = hub.querySelector('.active-link');
                 if (defaultLink) {
                     defaultLink.click(); 
