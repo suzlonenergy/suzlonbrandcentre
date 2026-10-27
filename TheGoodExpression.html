@@ -69,7 +69,7 @@
         ========================================= */
         .hubs-container {
             max-width: 1800px;
-            margin: 4rem auto;
+            margin: 2rem auto; /* REDUCED SPACING */
             padding: 0 2%;
         }
 
@@ -77,7 +77,7 @@
             background: var(--humble-beige, #F8F7F2);
             border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 4rem; 
+            margin-bottom: 2.5rem; /* REDUCED SPACING */
             display: grid;
             grid-template-columns: 75% 25%; 
             height: calc(100vh - 100px); 
@@ -90,7 +90,6 @@
             height: 100%; 
             background-color: transparent; 
             position: relative;
-            /* Padding removed from canvas to prevent transform bleed */
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -106,10 +105,10 @@
         }
 
         .slide-item {
-            flex: 0 0 100%; /* Strictly forces slide to take exactly 1 parent width */
+            flex: 0 0 100%; 
             width: 100%;
             height: 100%;
-            padding: 2rem; /* Padding moved inside the slide for perfect framing */
+            padding: 2rem; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -270,12 +269,13 @@
         @media (max-width: 1024px) {
             .showcase-hub {
                 grid-template-columns: 1fr;
-                display: flex;
-                flex-direction: column;
                 height: auto;
+                min-height: unset;
+                margin-bottom: 2rem;
             }
             .showcase-canvas {
-                min-height: 50vh;
+                min-height: 400px;
+                padding: 1rem;
                 border-bottom: 1px solid rgba(0, 112, 120, 0.1);
             }
             .showcase-controls {
@@ -286,25 +286,41 @@
         
         @media (max-width: 768px) {
             .page-hero {
-                padding: 4rem 5% !important;
+                padding: 3rem 5% !important;
+            }
+            .page-hero-content h1 {
+                font-size: 2rem;
+            }
+            .page-hero-content p {
+                font-size: 1rem !important;
+            }
+            .showcase-hub {
+                margin-bottom: 1.5rem;
             }
             .showcase-canvas {
-                min-height: 40vh;
+                min-height: 300px;
+                padding: 0.5rem;
             }
             .slide-item {
                 padding: 1rem;
             }
+            .showcase-controls {
+                padding: 1.5rem;
+                gap: 1rem;
+            }
             .showcase-info h2 {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
+            }
+            .showcase-info p {
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
             }
             .nav-link {
+                padding: 1rem 0;
                 font-size: 0.8rem;
             }
             .slider-dots {
                 bottom: 1rem;
-            }
-            .slide-item img, .slide-item video {
-                max-height: 50vh;
             }
         }
     </style>
@@ -477,7 +493,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript supporting Yoyo sliding vs Blink effects -->
+    <!-- JavaScript supporting true Infinite loop sliding & Video Hover Pausing -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -496,6 +512,7 @@
 
             revealElements.forEach(el => revealOnScroll.observe(el));
 
+
             // 2. MASTER HUB LOGIC
             const hubs = document.querySelectorAll('.showcase-hub');
             
@@ -507,12 +524,12 @@
                 
                 let currentMediaUrls = [];
                 let currentSlideIndex = 0;
-                let slideDirection = 1; // 1 for forward, -1 for reverse
                 let autoSlideInterval = null;
                 let isBlinkEffect = false;
 
                 const goToSlide = (index) => {
                     if (currentMediaUrls.length === 0) return;
+                    
                     currentSlideIndex = index;
                     
                     if (isBlinkEffect) {
@@ -526,19 +543,37 @@
                                 slide.style.opacity = '0';
                                 setTimeout(() => { 
                                     if(currentSlideIndex !== idx) slide.style.display = 'none'; 
-                                }, 300); // Wait for fade out to complete before hiding
+                                }, 300);
                             }
                         });
                         sliderTrack.style.transform = 'translateX(0%)';
+                        
+                        if (dotsContainer) {
+                            Array.from(dotsContainer.children).forEach((dot, idx) => {
+                                dot.classList.toggle('active', idx === currentSlideIndex);
+                            });
+                        }
                     } else {
-                        // Continuous smooth sliding transition using safe CSS math
+                        // Restore smooth CSS transition for sliding
+                        sliderTrack.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease-in-out';
                         sliderTrack.style.transform = `translateX(calc(-${currentSlideIndex * 100}%))`;
-                    }
-                    
-                    if (dotsContainer) {
-                        Array.from(dotsContainer.children).forEach((dot, idx) => {
-                            dot.classList.toggle('active', idx === currentSlideIndex);
-                        });
+                        
+                        // Map the clone slide (at the end) back to dot 0
+                        const activeDotIndex = currentSlideIndex % currentMediaUrls.length;
+                        if (dotsContainer) {
+                            Array.from(dotsContainer.children).forEach((dot, idx) => {
+                                dot.classList.toggle('active', idx === activeDotIndex);
+                            });
+                        }
+
+                        // Infinite loop magic: Wait for transition to end, then instantly jump back to real 0
+                        if (currentSlideIndex === currentMediaUrls.length) {
+                            setTimeout(() => {
+                                sliderTrack.style.transition = 'none'; // Turn off transition for instant jump
+                                currentSlideIndex = 0;
+                                sliderTrack.style.transform = `translateX(0%)`;
+                            }, 800); // 800ms matches the CSS transition duration
+                        }
                     }
                 };
 
@@ -547,18 +582,12 @@
                     if (currentMediaUrls.length > 1) {
                         autoSlideInterval = setInterval(() => {
                             if (isBlinkEffect) {
-                                // Blink effect continuously loops forward
                                 goToSlide((currentSlideIndex + 1) % currentMediaUrls.length);
                             } else {
-                                // Slider effect reverses when it hits the ends (Yoyo loop)
-                                if (currentSlideIndex >= currentMediaUrls.length - 1) {
-                                    slideDirection = -1; // Switch to reverse
-                                } else if (currentSlideIndex <= 0) {
-                                    slideDirection = 1; // Switch to forward
-                                }
-                                goToSlide(currentSlideIndex + slideDirection);
+                                // Slide forward to the next index (including the cloned slide at the end)
+                                goToSlide(currentSlideIndex + 1);
                             }
-                        }, 3500); // 3.5 seconds per slide for better readability
+                        }, 3500);
                     }
                 };
 
@@ -569,15 +598,24 @@
                     }
                 };
 
-                // Pause on hover
+                // Pause on hover + Video Hover Pausing Logic
                 if (canvas) {
-                    canvas.addEventListener('mouseenter', stopAutoSlide);
-                    canvas.addEventListener('mouseleave', startAutoSlide);
+                    canvas.addEventListener('mouseenter', () => {
+                        stopAutoSlide();
+                        const videos = canvas.querySelectorAll('video');
+                        videos.forEach(video => video.pause());
+                    });
+                    canvas.addEventListener('mouseleave', () => {
+                        startAutoSlide();
+                        const videos = canvas.querySelectorAll('video');
+                        videos.forEach(video => video.play());
+                    });
                 }
 
                 // Render HTML for track
                 const renderTrack = () => {
                     sliderTrack.innerHTML = '';
+                    sliderTrack.style.transition = 'none'; 
                     
                     currentMediaUrls.forEach((url, idx) => {
                         const slide = document.createElement('div');
@@ -599,7 +637,14 @@
                         sliderTrack.appendChild(slide);
                     });
 
-                    // Render Dots if applicable
+                    // CLONE THE FIRST SLIDE FOR SEAMLESS INFINITE LOOPING
+                    if (currentMediaUrls.length > 1 && !isBlinkEffect) {
+                        const firstClone = sliderTrack.children[0].cloneNode(true);
+                        firstClone.classList.add('slide-clone');
+                        sliderTrack.appendChild(firstClone);
+                    }
+
+                    // Render Dots
                     if (dotsContainer) {
                         dotsContainer.innerHTML = '';
                         if (currentMediaUrls.length > 1) {
@@ -609,8 +654,15 @@
                                 dot.className = `dot ${idx === 0 ? 'active' : ''}`;
                                 dot.addEventListener('click', () => {
                                     stopAutoSlide();
-                                    // Set correct direction based on dot clicked
-                                    slideDirection = idx > currentSlideIndex ? 1 : -1;
+                                    
+                                    // Snap back to real slide 0 before animating if we are currently on the clone
+                                    if (currentSlideIndex === currentMediaUrls.length && !isBlinkEffect) {
+                                        sliderTrack.style.transition = 'none';
+                                        currentSlideIndex = 0;
+                                        sliderTrack.style.transform = `translateX(0%)`;
+                                        void sliderTrack.offsetWidth; // Force reflow
+                                    }
+                                    
                                     goToSlide(idx);
                                     startAutoSlide();
                                 });
@@ -622,7 +674,8 @@
                     }
 
                     if (currentMediaUrls.length > 1) {
-                        goToSlide(0);
+                        currentSlideIndex = 0;
+                        sliderTrack.style.transform = 'translateX(0%)';
                         startAutoSlide();
                     } else {
                         stopAutoSlide();
@@ -630,33 +683,25 @@
                     }
                 };
 
-
                 // Link Click Logic
                 navLinks.forEach(link => {
                     link.addEventListener('click', function(e) {
                         e.preventDefault(); 
                         
-                        // Active State UI
                         const allItems = hub.querySelectorAll('.nav-item');
                         allItems.forEach(item => item.classList.remove('active-item'));
                         this.closest('.nav-item').classList.add('active-item');
 
-                        // Check for blink effect attribute
                         isBlinkEffect = this.getAttribute('data-effect') === 'blink';
 
-                        // Get media paths
                         const rawMedia = this.getAttribute('data-slider') || this.getAttribute('data-image');
                         if (!rawMedia) return;
 
-                        // Parse into array
                         currentMediaUrls = rawMedia.split(',').map(url => url.trim()).filter(Boolean);
 
                         sliderTrack.style.opacity = '0';
                         stopAutoSlide();
                         
-                        // Reset direction to forward on new tab click
-                        slideDirection = 1; 
-
                         setTimeout(() => {
                             renderTrack();
                             sliderTrack.style.opacity = '1';
