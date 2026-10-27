@@ -69,7 +69,7 @@
         ========================================= */
         .hubs-container {
             max-width: 1800px;
-            margin: 2rem auto; /* REDUCED SPACING */
+            margin: 1rem auto; /* REDUCED TOP/BOTTOM GAP */
             padding: 0 2%;
         }
 
@@ -77,11 +77,11 @@
             background: var(--humble-beige, #F8F7F2);
             border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 2.5rem; /* REDUCED SPACING */
+            margin-bottom: 1.25rem; /* REDUCED INTER-HUB SPACING */
             display: grid;
             grid-template-columns: 75% 25%; 
-            height: calc(100vh - 100px); 
-            min-height: 550px;
+            height: calc(100vh - 120px); 
+            min-height: 500px;
         }
 
         /* 1. The Presentation Canvas & Slider Track */
@@ -108,7 +108,7 @@
             flex: 0 0 100%; 
             width: 100%;
             height: 100%;
-            padding: 2rem; 
+            padding: 1.5rem; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -124,7 +124,7 @@
         /* 1b. Navigation Dots Container */
         .slider-dots {
             position: absolute;
-            bottom: 2rem;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -151,8 +151,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center; 
-            gap: 1.5rem; 
-            padding: 2rem; 
+            gap: 1rem; 
+            padding: 1.5rem; 
             background-color: transparent; 
             border-left: none; 
             overflow-y: auto; 
@@ -161,22 +161,22 @@
 
         .showcase-info h2 {
             font-family: 'Monda', sans-serif;
-            font-size: clamp(1.8rem, 2.5vw, 2.4rem); 
+            font-size: clamp(1.6rem, 2.2vw, 2.2rem); 
             font-weight: 700;
             color: var(--ever-teal, #007078);
             text-transform: none; 
             letter-spacing: -0.5px; 
-            margin-bottom: 1rem; 
+            margin-bottom: 0.5rem; 
             line-height: 1.15;
         }
 
         .showcase-info p {
             font-family: 'Monda', sans-serif;
-            font-size: 1.1rem; 
+            font-size: 1rem; 
             font-weight: 400;
             color: #4A4A4A;
-            line-height: 1.6; 
-            margin-bottom: 1.5rem; 
+            line-height: 1.5; 
+            margin-bottom: 1rem; 
         }
 
         /* =========================================
@@ -205,7 +205,7 @@
         .nav-link {
             flex: 1; 
             text-align: left; 
-            padding: 1.2rem 0; 
+            padding: 1rem 0; 
             color: var(--ever-teal, #007078);
             text-decoration: none;
             font-family: 'Monda', sans-serif;
@@ -257,6 +257,13 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
+        /* Support section spacing adjustment */
+
+        .support-section {
+            margin-top: 2rem;
+            padding: 3rem 1rem;
+        }
+
         /* =========================================
            4. RESPONSIVE MEDIA QUERIES 
         ========================================= */
@@ -271,7 +278,7 @@
                 grid-template-columns: 1fr;
                 height: auto;
                 min-height: unset;
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
             }
             .showcase-canvas {
                 min-height: 400px;
@@ -279,48 +286,48 @@
                 border-bottom: 1px solid rgba(0, 112, 120, 0.1);
             }
             .showcase-controls {
-                padding: 2rem;
+                padding: 1.5rem;
                 height: auto;
             }
         }
         
         @media (max-width: 768px) {
             .page-hero {
-                padding: 3rem 5% !important;
+                padding: 2.5rem 5% !important;
             }
             .page-hero-content h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             .page-hero-content p {
-                font-size: 1rem !important;
+                font-size: 0.95rem !important;
             }
             .showcase-hub {
-                margin-bottom: 1.5rem;
+                margin-bottom: 1.25rem;
             }
             .showcase-canvas {
                 min-height: 300px;
                 padding: 0.5rem;
             }
             .slide-item {
-                padding: 1rem;
+                padding: 0.75rem;
             }
             .showcase-controls {
-                padding: 1.5rem;
-                gap: 1rem;
+                padding: 1.25rem;
+                gap: 0.75rem;
             }
             .showcase-info h2 {
-                font-size: 1.5rem;
+                font-size: 1.35rem;
             }
             .showcase-info p {
-                font-size: 0.95rem;
-                margin-bottom: 1rem;
+                font-size: 0.9rem;
+                margin-bottom: 0.75rem;
             }
             .nav-link {
-                padding: 1rem 0;
-                font-size: 0.8rem;
+                padding: 0.75rem 0;
+                font-size: 0.75rem;
             }
             .slider-dots {
-                bottom: 1rem;
+                bottom: 0.75rem;
             }
         }
     </style>
@@ -345,11 +352,11 @@
 
     <main class="editorial-main" style="margin-top: 0; padding-top: 0; background-color: transparent;">
         
-        <!-- Full-Width Page Hero -->
-        <section class="page-hero" style="margin-top: 0; margin-bottom: 0; padding: 6rem 8%; background: url('Homepage Images/the good expression.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-sizing: border-box;">
+        <!-- Tightened Page Hero -->
+        <section class="page-hero" style="margin-top: 0; margin-bottom: 0; padding: 3.5rem 8%; background: url('Homepage Images/the good expression.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-sizing: border-box;">
             <div class="page-hero-content reveal" style="text-align: center; margin: 0 auto; max-width: 1200px;">
-                <h1 style="margin-bottom: 0.5rem; line-height: 1.2; color: #ffffff;">The Good Expression</h1>
-                <p style="margin-top: 0; font-size: 1.2rem; line-height: 1.6; color: #ffffff;">Defining our look and feel: iconography, photography, motion, and layouts that flow.</p>
+                <h1 style="margin-bottom: 0.4rem; line-height: 1.2; color: #ffffff;">The Good Expression</h1>
+                <p style="margin-top: 0; font-size: 1.1rem; line-height: 1.5; color: #ffffff;">Defining our look and feel: iconography, photography, motion, and layouts that flow.</p>
             </div>
         </section>
 
@@ -584,7 +591,6 @@
                             if (isBlinkEffect) {
                                 goToSlide((currentSlideIndex + 1) % currentMediaUrls.length);
                             } else {
-                                // Slide forward to the next index (including the cloned slide at the end)
                                 goToSlide(currentSlideIndex + 1);
                             }
                         }, 3500);
@@ -655,12 +661,11 @@
                                 dot.addEventListener('click', () => {
                                     stopAutoSlide();
                                     
-                                    // Snap back to real slide 0 before animating if we are currently on the clone
                                     if (currentSlideIndex === currentMediaUrls.length && !isBlinkEffect) {
                                         sliderTrack.style.transition = 'none';
                                         currentSlideIndex = 0;
                                         sliderTrack.style.transform = `translateX(0%)`;
-                                        void sliderTrack.offsetWidth; // Force reflow
+                                        void sliderTrack.offsetWidth;
                                     }
                                     
                                     goToSlide(idx);
